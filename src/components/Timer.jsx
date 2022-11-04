@@ -27,17 +27,17 @@ export default function Timer() {
     };
 
     const countTime = () => {
-        if (updatedMinutes === 60) {
+        updatedSeconds++;
+        if (updatedMinutes > 59) {
             updatedHours++;
             updatedMinutes = 0;
         }
 
-        if (updatedSeconds === 60) {
+        if (updatedSeconds > 59) {
             updatedMinutes++;
             updatedSeconds = 0;
         }
 
-        updatedSeconds++;
         return setTime({
             hours: updatedHours,
             minutes: updatedMinutes,
@@ -48,6 +48,8 @@ export default function Timer() {
     return (
         <>
             <p>
+                {time.hours < 10 ? `0${time.hours}` : time.hours}:
+                {time.minutes < 10 ? `0${time.minutes}` : time.minutes}:
                 {time.seconds < 10 ? `0${time.seconds}` : time.seconds}
             </p>
             <button
