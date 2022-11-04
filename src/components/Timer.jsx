@@ -6,9 +6,24 @@ export default function Timer() {
     const [hours, setHours] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
 
+    const handleTimerRunning = (event) => {
+        if (!isRunning) {
+            event.target.textContent = "Click to Stop";
+            setIsRunning(!isRunning);
+        } else {
+            event.target.textContent = "Click to Start";
+            setIsRunning(!isRunning);
+        }
+    };
+
     return (
         <>
-            <h1>Hello world!</h1>
+            <button
+                onClick={handleTimerRunning}
+                onSubmit={(e) => e.preventDefault()}
+            >
+            Click to Start
+            </button>
         </>
     );
 }
