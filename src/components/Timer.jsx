@@ -1,33 +1,48 @@
 import { useState } from 'react';
 
 export default function Timer() {
-    const [time, setTime] = useState({hours:0, minutes:0, seconds:0});
-    const [isRunning, setIsRunning] = useState(false);
+    const [time, setTime] = useState({hours:0, minutes:0, seconds:0, milliseconds:0});
+    const [isRunning, setIsRunning] = useState(0);
+    const [intervalId, setIntervalId] = useState();
 
     var updatedHours = time.hours,
         updatedMinutes = time.minutes,
-        updatedSeconds = time.seconds;
+        updatedSeconds = time.seconds,
+        updatedMilliseconds = time.milliseconds;
 
     const handleTimer = (event) => {
-        setIsRunning(!isRunning);
-        const updatedIsRunning = !isRunning;
-        console.log(updatedIsRunning);
-        if (updatedIsRunning) {
-            event.target.textContent = "Click to Stop";
+        if (isRunning === 0) {
             startTimer();
-        } else {
-            event.target.textContent = "Click to Start";
-            setIsRunning(!isRunning);
+            event.target.textContent = "Click to Pause";
+            setIsRunning(1);
+        } else if (isRunning === 1) {
+            stopTimer();
+            event.target.textContent = "Click to Resume";
+            setIsRunning(0);
         }
     };
 
     const startTimer = () => {
         countTime();
-        setInterval(countTime, 1000);
+        setIntervalId(setInterval(countTime, 10));
+    };
+
+    const stopTimer = () => {
+        clearInterval(intervalId);
+    }
+
+    const resetTimer = () => {
+        clearInterval(intervalId);
+        setIsRunning(0);
+        setTime({
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+            milliseconds: 0,
+        });
     };
 
     const countTime = () => {
-        updatedSeconds++;
         if (updatedMinutes > 59) {
             updatedHours++;
             updatedMinutes = 0;
@@ -37,11 +52,17 @@ export default function Timer() {
             updatedMinutes++;
             updatedSeconds = 0;
         }
+        if (updatedMilliseconds > 99) {
+            updatedSeconds++;
+            updatedMilliseconds = 0;
+        }
+        updatedMilliseconds++;
 
         return setTime({
             hours: updatedHours,
             minutes: updatedMinutes,
             seconds: updatedSeconds,
+            milliseconds: updatedMilliseconds,
         });
     };
 
