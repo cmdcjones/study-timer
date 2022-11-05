@@ -4,6 +4,7 @@ export default function Timer() {
     const [time, setTime] = useState({hours:0, minutes:0, seconds:0, milliseconds:0});
     const [isRunning, setIsRunning] = useState(0);
     const [intervalId, setIntervalId] = useState();
+    const [buttonStatus, setButtonStatus] = useState('Start');
 
     var updatedHours = time.hours,
         updatedMinutes = time.minutes,
@@ -11,14 +12,14 @@ export default function Timer() {
         updatedMilliseconds = time.milliseconds;
 
     const handleTimer = (event) => {
-        if (isRunning === 0) {
+        if (isRunning === 0 || isRunning === 2) {
             startTimer();
-            event.target.textContent = "Click to Pause";
+            setButtonStatus('Pause');
             setIsRunning(1);
         } else if (isRunning === 1) {
-            stopTimer();
-            event.target.textContent = "Click to Resume";
-            setIsRunning(0);
+            pauseTimer();
+            setButtonStatus('Resume');
+            setIsRunning(2);
         }
     };
 
@@ -27,12 +28,13 @@ export default function Timer() {
         setIntervalId(setInterval(countTime, 10));
     };
 
-    const stopTimer = () => {
+    const pauseTimer = () => {
         clearInterval(intervalId);
     }
 
     const resetTimer = () => {
         clearInterval(intervalId);
+        setButtonStatus('Start');
         setIsRunning(0);
         setTime({
             hours: 0,
@@ -76,8 +78,16 @@ export default function Timer() {
             <button
                 onClick={handleTimer}
             >
-            Click to Start
+        {buttonStatus}
             </button>
+            { isRunning ?
+            <button
+                onClick={resetTimer}
+            >
+            Reset
+            </button>
+            : ""
+            }
         </>
     );
 }
