@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ResetButton from './ResetButton';
 
 export default function Timer() {
     const [time, setTime] = useState({hours:0, minutes:0, seconds:0, milliseconds:0});
@@ -81,11 +82,15 @@ export default function Timer() {
         {buttonStatus}
             </button>
             { isRunning ?
-            <button
-                onClick={resetTimer}
-            >
-            Reset
-            </button>
+            <ResetButton
+                time={time}
+                setTime={setTime}
+                isRunning={isRunning}
+                setIsRunning={setIsRunning}
+                intervalId={intervalId}
+                buttonStatus={buttonStatus}
+                setButtonStatus={setButtonStatus}
+            />
             : ""
             }
         </>
