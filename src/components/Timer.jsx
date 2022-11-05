@@ -31,18 +31,6 @@ export default function Timer() {
 
     const pauseTimer = () => {
         clearInterval(intervalId);
-    }
-
-    const resetTimer = () => {
-        clearInterval(intervalId);
-        setButtonStatus('Start');
-        setIsRunning(0);
-        setTime({
-            hours: 0,
-            minutes: 0,
-            seconds: 0,
-            milliseconds: 0,
-        });
     };
 
     const countTime = () => {
