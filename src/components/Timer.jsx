@@ -8,21 +8,6 @@ export default function Timer() {
     const [intervalId, setIntervalId] = useState();
     const [buttonStatus, setButtonStatus] = useState('Start');
 
-    const handleTimer = () => {
-        if (isRunning === 0 || isRunning === 2) {
-            setButtonStatus('Pause');
-            setIsRunning(1);
-        } else if (isRunning === 1) {
-            pauseTimer();
-            setButtonStatus('Resume');
-            setIsRunning(2);
-        }
-    };
-
-    const pauseTimer = () => {
-        clearInterval(intervalId);
-    };
-
     return (
         <>
             <p>
