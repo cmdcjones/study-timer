@@ -38,6 +38,7 @@ export default function Timer() {
                 setIntervalId={setIntervalId}
                 buttonStatus={buttonStatus}
                 setButtonStatus={setButtonStatus}
+                isRunning={isRunning}
                 setIsRunning={setIsRunning}
             />
             : ""
