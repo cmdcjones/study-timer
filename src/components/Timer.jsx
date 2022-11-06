@@ -30,7 +30,6 @@ export default function Timer() {
                 {time.minutes < 10 ? `0${time.minutes}` : time.minutes}:
                 {time.seconds < 10 ? `0${time.seconds}` : time.seconds}
             </p>
-            { isRunning === 0 ?
             <SPRButton
                 time={time}
                 setTime={setTime}
@@ -41,9 +40,7 @@ export default function Timer() {
                 isRunning={isRunning}
                 setIsRunning={setIsRunning}
             />
-            : ""
-            }
-            { isRunning === 1 ?
+            { isRunning > 0 ?
             <ResetButton
                 setTime={setTime}
                 setIsRunning={setIsRunning}
