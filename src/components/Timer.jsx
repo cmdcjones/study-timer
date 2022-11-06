@@ -8,14 +8,8 @@ export default function Timer() {
     const [intervalId, setIntervalId] = useState();
     const [buttonStatus, setButtonStatus] = useState('Start');
 
-    var updatedHours = time.hours,
-        updatedMinutes = time.minutes,
-        updatedSeconds = time.seconds,
-        updatedMilliseconds = time.milliseconds;
-
     const handleTimer = () => {
         if (isRunning === 0 || isRunning === 2) {
-            startTimer();
             setButtonStatus('Pause');
             setIsRunning(1);
         } else if (isRunning === 1) {
@@ -25,37 +19,8 @@ export default function Timer() {
         }
     };
 
-    const startTimer = () => {
-        countTime();
-        setIntervalId(setInterval(countTime, 10));
-    };
-
     const pauseTimer = () => {
         clearInterval(intervalId);
-    };
-
-    const countTime = () => {
-        if (updatedMinutes > 59) {
-            updatedHours++;
-            updatedMinutes = 0;
-        }
-
-        if (updatedSeconds > 59) {
-            updatedMinutes++;
-            updatedSeconds = 0;
-        }
-        if (updatedMilliseconds > 99) {
-            updatedSeconds++;
-            updatedMilliseconds = 0;
-        }
-        updatedMilliseconds++;
-
-        return setTime({
-            hours: updatedHours,
-            minutes: updatedMinutes,
-            seconds: updatedSeconds,
-            milliseconds: updatedMilliseconds,
-        });
     };
 
     return (
