@@ -1,11 +1,8 @@
 
 export default function ResetButton({
-    time,
     setTime,
-    isRunning,
     setIsRunning,
     intervalId,
-    buttonStatus,
     setButtonStatus
 }) {
     const resetTimer = () => {
