@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ResetButton from './ResetButton';
-import StartButton from './StartButton';
+import SPRButton from './SPRButton';
 
 export default function Timer() {
     const [time, setTime] = useState({hours:0, minutes:0, seconds:0, milliseconds:0});
@@ -31,9 +31,10 @@ export default function Timer() {
                 {time.seconds < 10 ? `0${time.seconds}` : time.seconds}
             </p>
             { isRunning === 0 ?
-            <StartButton
+            <SPRButton
                 time={time}
                 setTime={setTime}
+                intervalId={intervalId}
                 setIntervalId={setIntervalId}
                 buttonStatus={buttonStatus}
                 setButtonStatus={setButtonStatus}

@@ -1,7 +1,8 @@
 
-export default function StartButton({
+export default function SPRButton({
     time,
     setTime,
+    intervalId,
     setIntervalId,
     buttonStatus,
     setButtonStatus,
@@ -17,6 +18,12 @@ export default function StartButton({
         setIsRunning(1);
         countTime();
         setIntervalId(setInterval(countTime, 10));
+    };
+
+    const pauseTimer = () => {
+        setButtonStatus('Resume');
+        setIsRunning(2);
+        clearInterval(intervalId);
     };
 
     const countTime = () => {
