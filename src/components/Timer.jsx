@@ -12,7 +12,7 @@ export default function Timer() {
         updatedSeconds = time.seconds,
         updatedMilliseconds = time.milliseconds;
 
-    const handleTimer = (event) => {
+    const handleTimer = () => {
         if (isRunning === 0 || isRunning === 2) {
             startTimer();
             setButtonStatus('Pause');
@@ -71,12 +71,9 @@ export default function Timer() {
             </button>
             { isRunning ?
             <ResetButton
-                time={time}
                 setTime={setTime}
-                isRunning={isRunning}
                 setIsRunning={setIsRunning}
                 intervalId={intervalId}
-                buttonStatus={buttonStatus}
                 setButtonStatus={setButtonStatus}
             />
             : ""
