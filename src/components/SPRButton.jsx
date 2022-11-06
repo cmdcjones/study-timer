@@ -6,6 +6,7 @@ export default function SPRButton({
     setIntervalId,
     buttonStatus,
     setButtonStatus,
+    isRunning,
     setIsRunning,
 }) {
     let updatedHours = time.hours,
@@ -25,6 +26,8 @@ export default function SPRButton({
         setIsRunning(2);
         clearInterval(intervalId);
     };
+
+    const resumeTimer = () => startTimer();
 
     const countTime = () => {
         if (updatedMinutes > 59) {
@@ -50,10 +53,16 @@ export default function SPRButton({
         });
     };
 
+    const buttonOperation = {
+        0 : startTimer,
+        1 : pauseTimer,
+        2 : resumeTimer,
+    }
+
     return (
         <>
             <button 
-                onClick={startTimer}
+                onClick={buttonOperation[isRunning]}
             >
             {buttonStatus}
             </button>
